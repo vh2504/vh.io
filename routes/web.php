@@ -17,35 +17,35 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-//test
-Route::get('/post', function(){
-    return view('post.index');
-});
+// //test
+// Route::get('/post', function(){
+//     return view('post.index');
+// });
 
-Route::get('page/{id}/{name}', function ($id, $name) {
-    return 'Hello ' . $id .$name;
-});
+// Route::get('page/{id}/{name}', function ($id, $name) {
+//     return 'Hello ' . $id .$name;
+// });
 
-Route::get('page', function () {
-    return view('page.index', ["name"=> 'Laravel']);
-});
+// Route::get('page', function () {
+//     return view('page.index', ["name"=> 'Laravel']);
+// });
 
-Route::get('welcome', function(){
-    return view('welcome');
-});
+// Route::get('welcome', function(){
+//     return view('welcome');
+// });
 
-//end test
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     return view('dashboard');
-// })->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
 
 // Route::resource('manage', UserController::class);
-// Route::middleware('auth')->group(function(){
-//     Route::get('manage',[UserController::class, 'list']);
-//     Route::get('manage/list',[UserController::class, 'list'])->name('list');
 
-//     Route::get('manage/edit/{id}',[UserController::class, 'edit']);
-//     Route::post('manage/update/{id}',[UserController::class, 'update']);
-//     Route::get('manage/delete/{id}',[UserController::class, 'delete']);
-// });
+Route::middleware('auth')->group(function(){
+    Route::get('manage',[UserController::class, 'list']);
+    Route::get('manage/list',[UserController::class, 'list'])->name('list');
+
+    Route::get('manage/edit/{id}',[UserController::class, 'edit']);
+    Route::post('manage/update/{id}',[UserController::class, 'update']);
+    Route::get('manage/delete/{id}',[UserController::class, 'delete']);
+});

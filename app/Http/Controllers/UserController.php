@@ -51,7 +51,6 @@ class UserController extends Controller
     {
         $user = User::find($id);
         $user->delete();
-        // return view('user.list' )->with('users', User::all());
         return redirect()->route('list', ['users'=> User::all()]);
     }
 }

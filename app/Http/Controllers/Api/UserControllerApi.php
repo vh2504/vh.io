@@ -13,12 +13,15 @@ class UserControllerApi extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index( Request $request)
     {
         $users = User::all();
         return response()->json($users);
     }
 
+    public function get_user_token(Request $request){
+        return response($request->user());
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -63,7 +66,6 @@ class UserControllerApi extends Controller
      */
     public function destroy($id)
     {
-        //
         return response()->json(User::find($id)->delete());
     }
 }

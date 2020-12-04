@@ -35,6 +35,9 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+            if($e->getHttpStatusCode() == 401 ){
+                dd('error');
+            }
         });
     }
 }

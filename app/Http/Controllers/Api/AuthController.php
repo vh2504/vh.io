@@ -42,4 +42,6 @@ class AuthController extends Controller
         $accessToken = Auth::user()->createToken('loginToken')->accessToken;
         return response(['user'=> Auth::user(), 'accessToken' => $accessToken]);
     }
+
+
 }

@@ -13,7 +13,7 @@ class UserControllerApi extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index( Request $request)
+    public function index()
     {
         $users = User::all();
         return response()->json($users);

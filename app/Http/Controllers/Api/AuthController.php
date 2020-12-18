@@ -37,11 +37,11 @@ class AuthController extends Controller
         ]);
 
         if(!Auth::attempt($userLogin))
-            return response(['mess' => 'login error']);
+            return response(['mess' => 'login error'], 401);
         
-        $accessToken = Auth::user()->createToken('loginToken')->accessToken;
-        return response(['user'=> Auth::user(), 'accessToken' => $accessToken]);
+        return response(['user'=> Auth::user()]);
     }
+
 
 
 }

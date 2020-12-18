@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserControllerApi;
 use App\Http\Controllers\Api\AuthController;
 
+use App\Http\Controllers\Api\UserController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -34,3 +35,11 @@ Route::delete('/users/{id}',  [UserControllerApi::class, 'destroy']);
 
 Route::post('/register-user', [AuthController::class, 'register']);
 Route::post('/login-user', [AuthController::class, 'login']);
+
+
+Route::group(['prefix' => 'userr'], function () {
+    Route::get('/{id}', [UserController::class, 'show']);
+    Route::get('/', [UserController::class, 'index']);
+    // Route::get('/paginate', [UserController::class, 'paginate']);
+});
+Route::get('user/paginate', [UserController::class, 'paginate']);

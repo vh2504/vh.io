@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -34,7 +36,6 @@ Route::get('/', function () {
 //     return view('welcome');
 // });
 
-
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
@@ -42,10 +43,26 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 // Route::resource('manage', UserController::class);
 
 Route::middleware('auth')->group(function(){
-    Route::get('manage',[UserController::class, 'list']);
-    Route::get('manage/list',[UserController::class, 'list'])->name('list');
+    Route::get('/manage',[UserController::class, 'list']);
+    Route::get('/manage/list',[UserController::class, 'list'])->name('list');
 
-    Route::get('manage/edit/{id}',[UserController::class, 'edit']);
-    Route::post('manage/update/{id}',[UserController::class, 'update']);
-    Route::get('manage/delete/{id}',[UserController::class, 'delete']);
+    Route::get('/manage/edit/{id}',[UserController::class, 'edit']);
+    Route::post('/manage/update/{id}',[UserController::class, 'update']);
+    Route::get('/manage/delete/{id}',[UserController::class, 'delete']);
 });
+
+
+
+Route::get('/login/facebook', function () {
+    return Socialite::driver('facebook')->redirect();
+})->name('login.facebook');
+
+Route::get('/login/facebook/callback', [UserController::class, 'handleLoginFacebook']);
+
+
+Route::get('/get-user-by-token-fb', function(){
+    $token = 'EAACZBOuui8ZBEBAOs9PIQxK0qNZA6Q3VIlIpoVBSobbZCrNWJGmR3BYH1UFtz722Lgs6UHurGnOZAJ1I5HJGzDNmuSMzf2uyRoL8uS6jkZC4CZBwnbpxW2Lxsk145E2f3VihjMKZAzxcUJa7aR598CWmg2n8AFes5rc2dTyVpK14bQZDZD';
+    $user = Socialite::driver('facebook')->userFromToken($token);
+    dd($user);
+});
+

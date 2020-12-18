@@ -54,6 +54,10 @@
                 <x-jet-button class="ml-4">
                     {{ __('Login') }}
                 </x-jet-button>
+
+                <x-jet-button class="ml-4">
+                    <a href="{{route('login.facebook')}}">{{ __('Login with facebook') }}</a>
+                </x-jet-button>
             </div>
         </form>
     </x-jet-authentication-card>

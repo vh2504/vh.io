@@ -10,6 +10,8 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 // use Laravel\Sanctum\HasApiTokens;
 use Laravel\Passport\HasApiTokens; 
+use App\Models\Relationship;
+use Illuminate\Database\Eloquent\Model;
 
 class User extends Authenticatable
 {
@@ -61,4 +63,12 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function getFriendOne() {
+        return $this->hasMany(Relationship::class,'user_first_id', 'id');
+    }
+
+    public function getFriendTwo() {
+        return $this->hasMany(Relationship::class,'user_second_id', 'id');
+    }
 }

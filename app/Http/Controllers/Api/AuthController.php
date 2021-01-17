@@ -35,9 +35,14 @@ class AuthController extends Controller
             'email'=> 'required|email',
             'password'=>'required'
         ]);
-
+       
         if(!Auth::attempt($userLogin))
             return response(['mess' => 'login error'], 401);
+  
+        // $user = Auth::user();
+        // $accessToken = $user->createToken('authToken')->accessToken;
+
+        // return response(['user'=>$userLogin, 'access_token' => $accessToken]);
         
         return response(['user'=> Auth::user()]);
     }
